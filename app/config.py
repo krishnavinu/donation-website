@@ -1,5 +1,5 @@
 SECRET_KEY = 'dev-key-please-change'
-SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:Vinu%408360@localhost/donation_system'
+SQLALCHEMY_DATABASE_URI = 'mysql+pymysql://root:password@localhost/donation_system'
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 MAIL_SERVER = 'smtp.gmail.com'
