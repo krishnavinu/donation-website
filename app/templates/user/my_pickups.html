@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>My Pickups</h1>
+    {% if pickups %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Address</th>
+                    <th>Items</th>
+                    <th>Status</th>
+                    <th>Pickup Time</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for pickup in pickups %}
+                <tr>
+                    <td>{{ pickup.address }}</td>
+                    <td>{{ pickup.items }}</td>
+                    <td>{{ pickup.status }}</td>
+                    <td>{{ pickup.pickup_time.strftime('%Y-%m-%d %H:%M') if pickup.pickup_time else 'N/A' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>You have not made any pickup requests yet.</p>
+    {% endif %}
+</div>
+{% endblock %} 

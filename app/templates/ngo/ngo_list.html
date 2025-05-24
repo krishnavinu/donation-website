@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>NGO Partners</h1>
+{% if ngos %}
+    <ul class="list-group">
+    {% for ngo in ngos %}
+        <li class="list-group-item">
+            <strong>{{ ngo.name }}</strong> - {{ ngo.email }}<br>
+            Location: {{ ngo.location }}<br>
+            {% if ngo.verified %}<span class="badge bg-success">Verified</span>{% endif %}
+        </li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No NGOs found.</p>
+{% endif %}
+{% endblock %} 

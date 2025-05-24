@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+
+{% block content %}
+<!-- Hero Section -->
+<div class="py-5 text-center text-white" style="background: linear-gradient(90deg, #007bff 0%, #00c6ff 100%); border-radius: 1rem;">
+    <div class="container">
+        <h1 class="display-3 fw-bold mb-3">Welcome to DonationHub</h1>
+        <p class="lead mb-4">Connecting donors, NGOs, and volunteers to make a real difference in the world.</p>
+        <a href="{{ url_for('donations.donate') }}" class="btn btn-lg btn-light fw-bold me-2">Make a Donation</a>
+        <a href="{{ url_for('main.ngo_list') }}" class="btn btn-lg btn-outline-light fw-bold">View NGOs</a>
+    </div>
+</div>
+
+<!-- Statistics Section -->
+<div class="container mt-5">
+    <div class="row text-center">
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-hand-holding-heart fa-3x text-primary mb-3"></i>
+                    <h3 class="card-title">{{ total_donations }}</h3>
+                    <p class="card-text">Total Donations Made</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-building fa-3x text-primary mb-3"></i>
+                    <h3 class="card-title">{{ active_ngos }}</h3>
+                    <p class="card-text">Partner NGOs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-0 shadow-sm">
+                <div class="card-body">
+                    <i class="fas fa-users fa-3x text-primary mb-3"></i>
+                    <h3 class="card-title">1000+</h3>
+                    <p class="card-text">Lives Impacted</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Urgent Needs Section -->
+{% if urgent_requests %}
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Urgent Needs</h2>
+    <div class="row">
+        {% for request in urgent_requests %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 border-primary border-2">
+                <div class="card-body">
+                    <h5 class="card-title text-primary">{{ request.ngo.name }}</h5>
+                    <p class="card-text">{{ request.description }}</p>
+                    <p class="text-muted">Needed by: {{ request.needed_by.strftime('%Y-%m-%d') }}</p>
+                    <a href="{{ url_for('donations.donate') }}" class="btn btn-outline-primary">Help Now</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+<!-- How It Works Section -->
+<div class="container mt-5 mb-5">
+    <h2 class="text-center mb-4">How It Works</h2>
+    <div class="row">
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4 bg-light rounded shadow-sm h-100">
+                <i class="fas fa-user-plus fa-3x text-primary mb-3"></i>
+                <h4>1. Sign Up</h4>
+                <p>Create your account to start making a difference</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4 bg-light rounded shadow-sm h-100">
+                <i class="fas fa-search fa-3x text-primary mb-3"></i>
+                <h4>2. Choose a Cause</h4>
+                <p>Find NGOs and causes you want to support</p>
+            </div>
+        </div>
+        <div class="col-md-4 text-center mb-4">
+            <div class="p-4 bg-light rounded shadow-sm h-100">
+                <i class="fas fa-gift fa-3x text-primary mb-3"></i>
+                <h4>3. Make a Donation</h4>
+                <p>Donate money or items to help those in need</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

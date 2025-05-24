@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h1>Admin Dashboard</h1>
+    <div class="row">
+        <div class="col-md-3">
+            <div class="card text-white bg-primary mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Users</h5>
+                    <p class="card-text">{{ stats.total_users if stats else 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-success mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total NGOs</h5>
+                    <p class="card-text">{{ stats.total_ngos if stats else 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-info mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Total Donations</h5>
+                    <p class="card-text">{{ stats.total_donations if stats else 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card text-white bg-warning mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">Pending Pickups</h5>
+                    <p class="card-text">{{ stats.pending_pickups if stats else 'N/A' }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <h2>Quick Links</h2>
+    <ul>
+        <li><a href="{{ url_for('admin.manage_users') }}">Manage Users</a></li>
+        <li><a href="{{ url_for('admin.manage_ngos') }}">Manage NGOs</a></li>
+        <li><a href="{{ url_for('admin.manage_donations') }}">Manage Donations</a></li>
+        <li><a href="{{ url_for('admin.manage_pickups') }}">Manage Pickups</a></li>
+        <li><a href="{{ url_for('admin.reports') }}">Reports</a></li>
+    </ul>
+</div>
+{% endblock %} 

@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12 text-center mb-4">
+            <h1 class="display-4 text-primary"><i class="fas fa-hands-helping"></i> NGO Dashboard</h1>
+            <p class="lead">Welcome, <strong>{{ ngo.name }}</strong>!</p>
+            <p class="text-muted">Email: {{ ngo.email }} | Location: {{ ngo.location }}</p>
+            {% if ngo.verified %}
+                <span class="badge bg-success">Verified</span>
+            {% else %}
+                <span class="badge bg-warning text-dark">Unverified</span>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-lg mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="fas fa-truck"></i> Pickup Requests</h3>
+                </div>
+                <div class="card-body">
+                    {% if pickups and pickups|length > 0 %}
+                        <table class="table table-hover align-middle">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Pickup ID</th>
+                                    <th scope="col">User</th>
+                                    <th scope="col">Address</th>
+                                    <th scope="col">Time</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Items</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pickup in pickups %}
+                                <tr>
+                                    <td>{{ pickup.pickup_id }}</td>
+                                    <td>{{ pickup.user.name if pickup.user else 'N/A' }}</td>
+                                    <td>{{ pickup.address }}</td>
+                                    <td>{{ pickup.pickup_time.strftime('%Y-%m-%d %H:%M') if pickup.pickup_time else 'N/A' }}</td>
+                                    <td>
+                                        {% if pickup.status == 'pending' %}
+                                            <span class="badge bg-warning text-dark">Pending</span>
+                                        {% elif pickup.status == 'completed' %}
+                                            <span class="badge bg-success">Completed</span>
+                                        {% else %}
+                                            <span class="badge bg-secondary">{{ pickup.status }}</span>
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ pickup.items }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    {% else %}
+                        <div class="alert alert-info text-center">
+                            <i class="fas fa-info-circle"></i> No pickup requests found for your NGO yet.
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row justify-content-center mt-4">
+        <div class="col-md-6 text-center">
+            <a href="{{ url_for('main.home') }}" class="btn btn-outline-primary btn-lg"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

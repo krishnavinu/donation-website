@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <h1>Manage NGOs</h1>
+    {% if ngos %}
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Location</th>
+                    <th>Verified</th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for ngo in ngos %}
+                <tr>
+                    <td>{{ ngo.ngo_id }}</td>
+                    <td>{{ ngo.name }}</td>
+                    <td>{{ ngo.email }}</td>
+                    <td>{{ ngo.location }}</td>
+                    <td>{{ 'Yes' if ngo.verified else 'No' }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No NGOs found.</p>
+    {% endif %}
+</div>
+{% endblock %} 
